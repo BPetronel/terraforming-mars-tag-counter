@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraforming Card Tags Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 24px;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .tag-list {
+            flex: 1;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-width: 500px;
+        }
+
+        .tag-list li {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tag-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+        }
+
+        .tag-name {
+            flex-grow: 1;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .tag-counter {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+
+        .counter {
+            display: inline-block;
+            padding: 0 16px 0 16px;
+        }
+
+        .reset-button {
+            padding: 8px 24px;
+            font-size: 20px;
+            align-self: center;
+        }
+    </style>
+</head>
+
+<body onload="loadInitialValues()">
+    <header>
+        <h1>Terraforming Card Tags Tracker</h1>
+    </header>
+    <section>
+        <ul class="tag-list">
+            <li>
+                <img class="tag-image" src="./science.png" alt="Science">
+                <span class="tag-name">Science</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('science', -1)">-</button>
+                    <span class="counter" id="scienceCounter">0</span>
+                    <button class="button" onclick="changeCount('science', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./building.png" alt="Building">
+                <span class="tag-name">Building</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('building', -1)">-</button>
+                    <span class="counter" id="buildingCounter">0</span>
+                    <button class="button" onclick="changeCount('building', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./plant.png" alt="Plant">
+                <span class="tag-name">Plant</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('plant', -1)">-</button>
+                    <span class="counter" id="plantCounter">0</span>
+                    <button class="button" onclick="changeCount('plant', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./microbe.png" alt="Microbe">
+                <span class="tag-name">Microbe</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('microbe', -1)">-</button>
+                    <span class="counter" id="microbeCounter">0</span>
+                    <button class="button" onclick="changeCount('microbe', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./power.png" alt="Power">
+                <span class="tag-name">Power</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('power', -1)">-</button>
+                    <span class="counter" id="powerCounter">0</span>
+                    <button class="button" onclick="changeCount('power', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./space.png" alt="Space">
+                <span class="tag-name">Space</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('space', -1)">-</button>
+                    <span class="counter" id="spaceCounter">0</span>
+                    <button class="button" onclick="changeCount('space', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./city.png" alt="City">
+                <span class="tag-name">City</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('city', -1)">-</button>
+                    <span class="counter" id="cityCounter">0</span>
+                    <button class="button" onclick="changeCount('city', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./animal.png" alt="Animal">
+                <span class="tag-name">Animal</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('animal', -1)">-</button>
+                    <span class="counter" id="animalCounter">0</span>
+                    <button class="button" onclick="changeCount('animal', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./jovian.png" alt="Jovian">
+                <span class="tag-name">Jovian</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('jovian', -1)">-</button>
+                    <span class="counter" id="jovianCounter">0</span>
+                    <button class="button" onclick="changeCount('jovian', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./earth.png" alt="Earth">
+                <span class="tag-name">Earth</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('earth', -1)">-</button>
+                    <span class="counter" id="earthCounter">0</span>
+                    <button class="button" onclick="changeCount('earth', 1)">+</button>
+                </span>
+            </li>
+            <li>
+                <img class="tag-image" src="./event.png" alt="Event">
+                <span class="tag-name">Event</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('event', -1)">-</button>
+                    <span class="counter" id="eventCounter">0</span>
+                    <button class="button" onclick="changeCount('event', 1)">+</button>
+                </span>
+            </li>
+        </ul>
+    </section>
+    <button class="reset-button" onclick="reset()">Reset</button>
+
+    <script>
+
+        const tags = [
+            'scienceCounter',
+            'buildingCounter',
+            'plantCounter',
+            'microbeCounter',
+            'powerCounter',
+            'spaceCounter',
+            'cityCounter',
+            'animalCounter',
+            'jovianCounter',
+            'earthCounter',
+            'eventCounter',
+        ];
+
+        function loadInitialValues() {
+            tags.forEach(key => {
+                let savedValue = localStorage.getItem(key) || 0;
+                let counterElement = document.getElementById(key);
+                counterElement.textContent = savedValue;
+            });
+        }
+
+        function changeCount(tag, amount) {
+            let key = `${tag}Counter`;
+            console.log(key);
+            let counterElement = document.getElementById(key);
+            let currentCount = parseInt(counterElement.textContent);
+            let newCount = currentCount + amount;
+            if (newCount < 0) {
+                newCount = 0;
+            } else {
+                localStorage.setItem(key, newCount);
+                counterElement.textContent = newCount;
+            }
+        }
+
+        function reset() {
+            localStorage.clear();
+            loadInitialValues();
+        }
+    </script>
+</body>
+
+</html>
