@@ -208,6 +208,15 @@
                     <button class="button" onclick="changeCount('event', 1)">+</button>
                 </span>
             </li>
+            <li>
+                <img class="tag-image" src="./wild.png" alt="Wild">
+                <span class="tag-name">Wild</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('wild', -1)">-</button>
+                    <span class="counter" id="wildCounter">0</span>
+                    <button class="button" onclick="changeCount('wild', 1)">+</button>
+                </span>
+            </li>
         </ul>
     </section>
     <button class="reset-button" onclick="reset()">Reset</button>
@@ -227,6 +236,7 @@
             'earthCounter',
             'eventCounter',
             'venusCounter',
+            'wildCounter'
         ];
 
         function loadInitialValues() {
