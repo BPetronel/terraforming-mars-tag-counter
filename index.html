@@ -191,6 +191,15 @@
                 </span>
             </li>
             <li>
+                <img class="tag-image" src="./venus.png" alt="Venus">
+                <span class="tag-name">Venus</span>
+                <span class="tag-counter">
+                    <button class="button" onclick="changeCount('venus', -1)">-</button>
+                    <span class="counter" id="venusCounter">0</span>
+                    <button class="button" onclick="changeCount('venus', 1)">+</button>
+                </span>
+            </li>
+            <li>
                 <img class="tag-image" src="./event.png" alt="Event">
                 <span class="tag-name">Event</span>
                 <span class="tag-counter">
@@ -217,6 +226,7 @@
             'jovianCounter',
             'earthCounter',
             'eventCounter',
+            'venusCounter',
         ];
 
         function loadInitialValues() {
