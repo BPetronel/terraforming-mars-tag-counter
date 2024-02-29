@@ -99,8 +99,8 @@
         <h1>Terraforming Card Tags Tracker</h1>
     </header>
     <section>
-        <ul class="tag-list">
-            <li>
+        <ul id="sortable" class="tag-list">
+            <li draggable="true">
                 <img class="tag-image" src="./science.png" alt="Science">
                 <span class="tag-name">Science</span>
                 <span class="tag-counter">
@@ -109,7 +109,7 @@
                     <button class="button" onclick="changeCount('science', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./building.png" alt="Building">
                 <span class="tag-name">Building</span>
                 <span class="tag-counter">
@@ -118,7 +118,7 @@
                     <button class="button" onclick="changeCount('building', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./plant.png" alt="Plant">
                 <span class="tag-name">Plant</span>
                 <span class="tag-counter">
@@ -127,7 +127,7 @@
                     <button class="button" onclick="changeCount('plant', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./microbe.png" alt="Microbe">
                 <span class="tag-name">Microbe</span>
                 <span class="tag-counter">
@@ -136,7 +136,7 @@
                     <button class="button" onclick="changeCount('microbe', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./power.png" alt="Power">
                 <span class="tag-name">Power</span>
                 <span class="tag-counter">
@@ -145,7 +145,7 @@
                     <button class="button" onclick="changeCount('power', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./space.png" alt="Space">
                 <span class="tag-name">Space</span>
                 <span class="tag-counter">
@@ -154,7 +154,7 @@
                     <button class="button" onclick="changeCount('space', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./city.png" alt="City">
                 <span class="tag-name">City</span>
                 <span class="tag-counter">
@@ -163,7 +163,7 @@
                     <button class="button" onclick="changeCount('city', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./animal.png" alt="Animal">
                 <span class="tag-name">Animal</span>
                 <span class="tag-counter">
@@ -172,7 +172,7 @@
                     <button class="button" onclick="changeCount('animal', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./jovian.png" alt="Jovian">
                 <span class="tag-name">Jovian</span>
                 <span class="tag-counter">
@@ -181,7 +181,7 @@
                     <button class="button" onclick="changeCount('jovian', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./earth.png" alt="Earth">
                 <span class="tag-name">Earth</span>
                 <span class="tag-counter">
@@ -190,7 +190,7 @@
                     <button class="button" onclick="changeCount('earth', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./venus.png" alt="Venus">
                 <span class="tag-name">Venus</span>
                 <span class="tag-counter">
@@ -199,7 +199,7 @@
                     <button class="button" onclick="changeCount('venus', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./event.png" alt="Event">
                 <span class="tag-name">Event</span>
                 <span class="tag-counter">
@@ -208,7 +208,7 @@
                     <button class="button" onclick="changeCount('event', 1)">+</button>
                 </span>
             </li>
-            <li>
+            <li draggable="true">
                 <img class="tag-image" src="./wild.png" alt="Wild">
                 <span class="tag-name">Wild</span>
                 <span class="tag-counter">
@@ -222,6 +222,85 @@
     <button class="reset-button" onclick="reset()">Reset</button>
 
     <script>
+
+        const sortableList =
+            document.getElementById("sortable");
+        let draggedItem = null;
+
+        sortableList.addEventListener(
+            "dragstart",
+            (e) => {
+                draggedItem = e.target;
+                setTimeout(() => {
+                    e.target.style.display =
+                        "none";
+                }, 0);
+            });
+
+        sortableList.addEventListener(
+            "dragend",
+            (e) => {
+                setTimeout(() => {
+                    e.target.style.display = "";
+                    draggedItem = null;
+                }, 0);
+            });
+
+        sortableList.addEventListener(
+            "dragover",
+            (e) => {
+                e.preventDefault();
+                const afterElement =
+                    getDragAfterElement(
+                        sortableList,
+                        e.clientY);
+                const currentElement =
+                    document.querySelector(
+                        ".dragging");
+                if (afterElement == null) {
+                    sortableList.appendChild(
+                        draggedItem
+                    );
+                }
+                else {
+                    sortableList.insertBefore(
+                        draggedItem,
+                        afterElement
+                    );
+                }
+            });
+
+        const getDragAfterElement = (
+            container, y
+        ) => {
+            const draggableElements = [
+                ...container.querySelectorAll(
+                    "li:not(.dragging)"
+                ),];
+
+            return draggableElements.reduce(
+                (closest, child) => {
+                    const box =
+                        child.getBoundingClientRect();
+                    const offset =
+                        y - box.top - box.height / 2;
+                    if (
+                        offset < 0 &&
+                        offset > closest.offset) {
+                        return {
+                            offset: offset,
+                            element: child,
+                        };
+                    }
+                    else {
+                        return closest;
+                    }
+                },
+                {
+                    offset: Number.NEGATIVE_INFINITY,
+                }
+            ).element;
+        };
 
         const tags = [
             'scienceCounter',
