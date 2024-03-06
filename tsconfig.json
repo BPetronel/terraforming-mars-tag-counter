@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "allowJs": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
